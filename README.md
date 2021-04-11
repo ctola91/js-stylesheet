@@ -350,3 +350,38 @@ lotrChar._name = 'Sam'; // _name is not private and we can still access it.
 console.log(lotrChar.name);
 ```
 
+## Esponentiation operator
+
+```javascript
+const area = 3.14 * Math.pow(r, 2);
+```
+
+ES2015+ also has some other functionalities, among them, we can ```list iterators, type arrays, Set, Map, WeakSet, WeakMap, tail calls, for..of, Symbol, Array.prototype.includes```
+
+## Modules
+
+Node.js use by default CommonJS modules, there is also another popular javascript standard for modules wich is the Asyncrhonous Module Definition (AMD), RequireJS is the most popular AMD implementation.
+
+```javascript
+// calcArea.js
+const circleArea = r => 3.14 * ( r ** 2);
+const squareArea = s => s * s;
+
+module.exports = {
+  circleArea, squareArea
+};
+
+// 
+const { circleArea ,squareArea } = require('./calcArea');
+```
+
+ES2015 introduced an official module feature in the javascript specification.
+
+```javascript
+// calcArea.js
+const circleArea = r => 3.14 * ( r ** 2);
+const squareArea = s =>  s * s;
+export { circleArea, squareArea };
+//
+import { circleArea, squareArea } from './calcArea';
+```
