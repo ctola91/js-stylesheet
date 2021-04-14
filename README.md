@@ -350,13 +350,13 @@ lotrChar._name = 'Sam'; // _name is not private and we can still access it.
 console.log(lotrChar.name);
 ```
 
-## Esponentiation operator
+## Exponentiation operator
 
 ```javascript
 const area = 3.14 * Math.pow(r, 2);
 ```
 
-ES2015+ also has some other functionalities, among them, we can ```list iterators, type arrays, Set, Map, WeakSet, WeakMap, tail calls, for..of, Symbol, Array.prototype.includes```
+ES2015+ also has some other functionalities, among them, we can <code>list iterators, type arrays, Set, Map, WeakSet, WeakMap, tail calls, for..of, Symbol, Array.prototype.includes</code>
 
 ## Modules
 
@@ -384,4 +384,149 @@ const squareArea = s =>  s * s;
 export { circleArea, squareArea };
 //
 import { circleArea, squareArea } from './calcArea';
+// or
+import * as calcArea from './calcArea';
 ```
+
+## Running ES2015 modules in the browser and with Node.js
+
+use babel-cli
+```bash
+npm install -g babel-cli
+```
+
+then transpile code with babel your project with:
+```bash
+babel app.js --out-dir lib
+```
+
+also you can use flag --experimental-modules for node.js 8.5+
+
+```bash
+cd app
+node --experimental-modules app.js
+```
+
+## Introducing Typescript
+
+Typescript is an open source, gradually typed superset of Javascript created and maintained by Mycrosoft
+It was created to allow developers to supercharge the Javascript language and to also make it easier to scale applications.
+
+to get started with TypeScript, we need to instal it using npm:
+
+```bash
+npm install -g typescript
+```
+
+next we need to craete a file with the <code>.ts</code> extension such as **hello-world.ts**:
+
+```typescript
+let myName = 'Packt';
+myName = 10;
+```
+
+we can compile it using: <code>tsc hello-world</code> on the terminal and we have on console the next error:
+
+> *hello-world.ts(2,1): error TS2322: Type '10' is not assignable to type 'string'.*
+
+This is because typescript check data types of variables, this allows to have a javascript code with less chances of errors or bugs.
+
+### Type inference
+
+Typescript allows us to assign a type to a variable, based on the value that was assigned to it.
+
+```typescript
+let age  = 20; // number
+let existsFlag = true; // boolean
+let language = 'Javascript'; // string
+```
+ if we don't type a variable then it is automatically types as **any** meaning it can receive any value as it is in Javascript
+
+### Interfaces
+
+In Typescript there area two concepts for interfaces. The first one is related to assigning a type to a variable. Consider the following code:
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+
+function printName(person: Person) {
+  console.log(person.name);
+}
+```
+
+The first concept for the Typescript interface is that an interface is a thing. It's a description of the attributes and methods an object must have.
+
+Now, let's try using the printName function:
+
+```typescript
+const john = { name: 'John', age: 21 };
+const mary = { name: 'Mary', age: 21, phone: '123-45678' };
+printName(john);
+printName(mary);
+```
+
+The preceding code does not have any compilation errors. The variable **john** has a *name* and *age* as expected by the **printName** function. The variable **mary** has a *name* and *age*, but also has *phone* information.
+
+Typescript has a concept called **Duck Typing**. If it looks like a duck, swims like a duck, and quacks like a ducks, then it must ne a duck!. In the example the variable **mary** behaves like the *Person* interface, so it must be a *Person*. This is a powerful feature of Typescript.
+
+The second concept for the TypeScript interface is related to object-oriented programming. This is the same concept as in other object-oriented languages such as Java, C#, Ruby, and so on. An interface is a contract. In this contract we can define what behavior the classes or interfaces that will implement this contract should have.
+
+```typescript
+interface Comparable {
+  compareTo(b): number;
+}
+
+class MyObject implements Comparable {
+  age: number;
+
+  compareTo(b): number {
+    if(this.age === b.age) {
+      return 0;
+    }
+    return this.age > b.age ? 1 : -1;
+  }
+}
+```
+
+The *Comparable* interface tells the MyObject class that it should implement a method called *compareTo* that receives an argument. Inside this method, we can code the required logic.
+
+### Generics
+
+Another powerful feature of Typescript that is useful to data structures and algorithms is the generic concept. Let's modify the Comparable interface so that we can define the type of the object the compareTo method should receive as an argument:
+
+```typescript
+interface Comparable<T> {
+  compareTo(b: T) : number;
+}
+```
+
+By passing the T type dynamically to the **Comparable** interface, between the diamond operator **<>**, we can specify the argument type of the c*ompareTo* function:
+
+```typescript
+class MyObject implements Comparable<MyObject> {
+  age: number;
+  
+  compareTo(b: MyObject) : number {
+    if(this.age === b.age) {
+      return 0;
+    }
+    return this.age > b.age ? 1: -1;
+  }
+}
+```
+
+This is useful so that we can make sure we are comparing objects of the same type, and by using this functionality, we also get code completion from the editor.
+
+### Other TypeScript functionalities
+
+This was a very quick introduction to Typescript. The Typescript documentation is a great place for learning all the other functionalities and to dive into the details of the topics we quicklu covered in this chapter; it can be found at [https://www.typescriptlang.org/docs/home.html](https://www.typescriptlang.org/docs/home.html)
+
+### Typescript compile-time checking in Javascript files
+
+Some developers still prefer using plain Javascript to develop their code instead of Typescript. But it would be nice if we could use some of the type and error checking features in Javascript as well!
+
+The good news is that Typescript has a special functionality that allows us to have this compile-time error and type checking! To use it, we need to have Typescript installed globally on our computer. In the first line of the Javascript files, we want to use type and error checking, so we simply need to add **// @ts-check**. The type checking is enabled when we add JSDoc to our code.
+ 
