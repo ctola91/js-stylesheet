@@ -127,3 +127,27 @@ numbers.unshift(-4, -3);
 
 So, using the unshift method, we can add the value -2 and then -3, and then -4 to the beginning of the numbers array.
 
+
+## Removing elements
+
+we can learn how can we remove a value from an array.
+
+### Removing an element from the end of the array
+
+To remove a value from the end of an array, we can use the *pop* method:
+
+```javascript
+numbers.pop();
+```
+
+> The **push** and **pop** methods allow an array to emaulate a basic stack data structure.
+
+### Removing an element from the first position
+
+To remove a value from the beginning of the array, we can use the following code:
+
+```javascript
+for(let i = 0; i < numbers.length; i++) {
+    numbers[i] = numbers[i + 1];
+}
+```
