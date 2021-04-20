@@ -151,3 +151,54 @@ for(let i = 0; i < numbers.length; i++) {
     numbers[i] = numbers[i + 1];
 }
 ```
+
+We have only overwritten the array's original values, and we did not really remove the value (as the length of the array is still the same and we have this extra *undefined* element).
+
+To remove the value from the array, we can also create a removeFirstPosition method with the logic described in this topic, However, to really remove the element from the array we need to create a new array and copy all values other than undefined values from the original array to the new one and assign the new array to our array:
+
+```javascript
+Array.prototype.reIndex = function(myArray) {
+  const newArray = [];
+  for(let i = 0; i < myArray.length; i++) {
+    if(myArray[i] !== undefined) {
+      newArray.push(myArray[i]);
+    }
+  }
+  return newArray;
+}
+
+// remove first position manually and reIndex
+Array.prototype.removeFirstPosition = function () {
+  for(let i = 0; i < this.length; i++) {
+    this[i] = this[i + 1];
+  }
+  return this.reIndex(this);
+};
+
+numbers = numbers.removeFirstPosition();
+```
+
+> This code should be used only for educational purposes and should not be used in real projects.
+
+### Using the shift method
+
+To remove an element from the beginning of the array, we can use the shift method:
+
+```javascript
+numbers.shift();
+```
+
+> The **shift** and **unshift** methods allow an array emulate a basic queue data structure.
+
+## Adding and removing elements from a specific position
+
+We can use the **splice** method to remove an element from an arraay by simply specifying the position/index that we would like to delete from and how many elements we would like to remove:
+
+```javascript
+numbers.splice(5, 3)
+```
+
+This code will remove three elements, starting from index 5 of our array (<code>numbers[5]</code>, <code>numbers[6]</code>, <code>numbers[7]</code> will be removed from the <code>numbers</code> array).
+
+> As with JavaScript arrays and objects, we can also use the **delete** operator to remove an element from the array, for example <code>delete numbers[0]</code>. However position 0 of the array will have the value **undefined**, so for this reason We should always use the <code>splice, pop or shift</code> methods to remove elements.
+
