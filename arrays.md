@@ -216,3 +216,47 @@ numbers.splice(5, 3, 2, 3, 4);
 ```
 
 In this case we removed three elements from the index 5 and we are also adding the elements 2, 3, and 4, starting at index 5.
+
+## Two-dimensional and multi-dimensional arrays
+
+We can use a matrix(a two-dimensial array or an *array of arrays*) to store two dimensional information:
+```javascript
+let averageTemp = [];
+averageTemp[0] = [72, 75, 79, 79, 81, 81];
+averageTemp[1] = [81, 79, 75, 75, 73, 72];
+```
+
+Javascript only support one-dimensional arrays; it does not support matrices. However, we can implement matrices or any multi-dimensional array using an array of arrays, te same can also be written as follows:
+
+```javascript
+// day 1
+averageTemp[0] = [];
+averageTemp[0][0] = 72;
+averageTemp[0][1] = 75;
+averageTemp[0][2] = 79;
+averageTemp[0][3] = 79;
+averageTemp[0][4] = 81;
+averageTemp[0][5] = 81;
+// day 2
+averageTemp[1] = [];
+averageTemp[1][0] = 81;
+averageTemp[1][1] = 79;
+averageTemp[1][2] = 75;
+averageTemp[1][3] = 75;
+averageTemp[1][4] = 73;
+averageTemp[1][5] = 73;
+```
+
+## Iterating the elements of two-dimensional arrays
+
+If we want to verify the output of the matrix, we can create a generic function to log its output.
+
+```javascript
+function printMatrix(myMatrix) {
+  for(let i = 0; i < myMatrix.length; i++) {
+    for(let j = 0; j < myMatrix[i].length; j++) {
+      console.log(myMatrix[i][j]);
+    }
+  }
+}
+```
