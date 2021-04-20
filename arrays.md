@@ -202,3 +202,17 @@ This code will remove three elements, starting from index 5 of our array (<code>
 
 > As with JavaScript arrays and objects, we can also use the **delete** operator to remove an element from the array, for example <code>delete numbers[0]</code>. However position 0 of the array will have the value **undefined**, so for this reason We should always use the <code>splice, pop or shift</code> methods to remove elements.
 
+Now let's say we want to insert numbers 2 to 4 back into the array, starting from position 5. We can again use the splice method to do this:
+
+```javascript
+numbers.splice(5, 0, 2, 3, 4);
+```
+
+The first argument of the method is the index we want to remove elements from or insert elements into, The second argument is the number of elements we want to remove (in this case, we do not want to remove any, so will pass the value 0). And from the third argument onward we have the values we would like to insert into the array (the elements 2, 3, 4).
+
+Finally let's execute the following code:
+```javascript
+numbers.splice(5, 3, 2, 3, 4);
+```
+
+In this case we removed three elements from the index 5 and we are also adding the elements 2, 3, and 4, starting at index 5.
