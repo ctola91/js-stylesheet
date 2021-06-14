@@ -35,7 +35,15 @@ Declaring, creating and initializing an array in Javascript is really simple:
 ```javascript
 let daysOfWeek = new Array(); // using the keyword new
 daysOfWeek = new Array(7); // using the keyword new with a length of the array
-daysOfWeek = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'); // pass the elements directly to its constructor
+daysOfWeek = new Array(
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+); // pass the elements directly to its constructor
 daysOfWeek = []; // best practice
 ```
 
@@ -43,7 +51,15 @@ However, using the new keyword is not considered best practice. if we want to cr
 
 ```javascript
 let daysOfWeek = []; // best practice
-let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; // best practice with some elements
+let daysOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+]; // best practice with some elements
 
 console.log(daysOfWeek.length); // how many elements are in the array
 ```
@@ -54,7 +70,7 @@ To access a specific position of the array, we can also use brackets , passing t
 
 ```javascript
 for (let i = 0; i < dausOfWeek.length; i++) {
-    console.log(daysOfWeek[i]);
+  console.log(daysOfWeek[i]);
 }
 ```
 
@@ -78,7 +94,7 @@ for (let i = 1; i < fibonacci.length; i++) {
 Adding and removing elements from an array is not that difficult; however, it can be tricky, we use the next array for samples:
 
 ```javascript
-let numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 ```
 
 ### Inserting an element at the end of the array
@@ -127,14 +143,13 @@ numbers.unshift(-4, -3);
 
 So, using the unshift method, we can add the value -2 and then -3, and then -4 to the beginning of the numbers array.
 
-
 ## Removing elements
 
 we can learn how can we remove a value from an array.
 
 ### Removing an element from the end of the array
 
-To remove a value from the end of an array, we can use the *pop* method:
+To remove a value from the end of an array, we can use the _pop_ method:
 
 ```javascript
 numbers.pop();
@@ -147,29 +162,29 @@ numbers.pop();
 To remove a value from the beginning of the array, we can use the following code:
 
 ```javascript
-for(let i = 0; i < numbers.length; i++) {
-    numbers[i] = numbers[i + 1];
+for (let i = 0; i < numbers.length; i++) {
+  numbers[i] = numbers[i + 1];
 }
 ```
 
-We have only overwritten the array's original values, and we did not really remove the value (as the length of the array is still the same and we have this extra *undefined* element).
+We have only overwritten the array's original values, and we did not really remove the value (as the length of the array is still the same and we have this extra _undefined_ element).
 
 To remove the value from the array, we can also create a removeFirstPosition method with the logic described in this topic, However, to really remove the element from the array we need to create a new array and copy all values other than undefined values from the original array to the new one and assign the new array to our array:
 
 ```javascript
-Array.prototype.reIndex = function(myArray) {
+Array.prototype.reIndex = function (myArray) {
   const newArray = [];
-  for(let i = 0; i < myArray.length; i++) {
-    if(myArray[i] !== undefined) {
+  for (let i = 0; i < myArray.length; i++) {
+    if (myArray[i] !== undefined) {
       newArray.push(myArray[i]);
     }
   }
   return newArray;
-}
+};
 
 // remove first position manually and reIndex
 Array.prototype.removeFirstPosition = function () {
-  for(let i = 0; i < this.length; i++) {
+  for (let i = 0; i < this.length; i++) {
     this[i] = this[i + 1];
   }
   return this.reIndex(this);
@@ -195,7 +210,7 @@ numbers.shift();
 We can use the **splice** method to remove an element from an arraay by simply specifying the position/index that we would like to delete from and how many elements we would like to remove:
 
 ```javascript
-numbers.splice(5, 3)
+numbers.splice(5, 3);
 ```
 
 This code will remove three elements, starting from index 5 of our array (<code>numbers[5]</code>, <code>numbers[6]</code>, <code>numbers[7]</code> will be removed from the <code>numbers</code> array).
@@ -211,6 +226,7 @@ numbers.splice(5, 0, 2, 3, 4);
 The first argument of the method is the index we want to remove elements from or insert elements into, The second argument is the number of elements we want to remove (in this case, we do not want to remove any, so will pass the value 0). And from the third argument onward we have the values we would like to insert into the array (the elements 2, 3, 4).
 
 Finally let's execute the following code:
+
 ```javascript
 numbers.splice(5, 3, 2, 3, 4);
 ```
@@ -219,7 +235,8 @@ In this case we removed three elements from the index 5 and we are also adding t
 
 ## Two-dimensional and multi-dimensional arrays
 
-We can use a matrix(a two-dimensial array or an *array of arrays*) to store two dimensional information:
+We can use a matrix(a two-dimensial array or an _array of arrays_) to store two dimensional information:
+
 ```javascript
 let averageTemp = [];
 averageTemp[0] = [72, 75, 79, 79, 81, 81];
@@ -253,10 +270,71 @@ If we want to verify the output of the matrix, we can create a generic function 
 
 ```javascript
 function printMatrix(myMatrix) {
-  for(let i = 0; i < myMatrix.length; i++) {
-    for(let j = 0; j < myMatrix[i].length; j++) {
+  for (let i = 0; i < myMatrix.length; i++) {
+    for (let j = 0; j < myMatrix[i].length; j++) {
       console.log(myMatrix[i][j]);
     }
   }
 }
+
+printMatrix(averageTemp);
+```
+
+> The output a two-dimensional array in the browser console, we can also use the `console.table(averageTemp)` statement, for a more user-friendly output.
+
+### Multi-dimensional arrays
+
+We can also work with multi-dimensional arrays in Javascript
+
+```javascript
+const matrix3x3x3 = [];
+for (let i = 0; i < 3; i++) {
+  matrix3x3x3[i] = []; // we need to initialize each array
+  for (let j = 0; j < 3; j++) {
+    matrix3x3x3[i][j] = [];
+    for (let z = 0; z < 3; z++) {
+      matrix3x3x3[i][j][z] = i + j + z;
+    }
+  }
+}
+```
+
+If we had a 3x3x3x3 matrix we would have four nested for statements in our code and so on. You rarely will need a four-dimensional array in your career as a developer. Two dimensional arrays are most common
+
+## References for Javascript array methods
+
+Arrays in Javascript are modified objects, meaning that every array we create has a few methods available to be used.
+
+Javascript arrays are very interesting because they are very powerful and have more capabilities available than primitive arrays in other languages.
+
+| method | description |
+| ------ | ----------- |
+| concat | Joins multiple arrays and returns a copy of the joined arrays |
+| every | Iterates every element of the array, verifying the desired condition (function) until **false** is returned |
+| filter | Creates an array with each element that evaluates to true in the function provided |
+| forEach | Executes a specific function on each element of the array. |
+| join | Joins all the array elements into a string |
+| indexOf | Searches the array for specific elements and returns its position. |
+| lastIndexOf | Returns the position of the last item in the array that matches the search criterion. |
+| map | Creates a new array from a function that contains the criterion/condition and returns the elements of the array that match the criterion. |
+| reverse | Reverses the array so that the last item becomes the first and vice versa. |
+| slice | Returns a new array from the specified **index** |
+| some | Iterates every element of the array, verifying the desired conditiion (function) until **true** is returned |
+| sort | Sorts the array alphabetically or by the supplied function |
+| toString | Returns the array as a string |
+| valueOf | Similar to the **toString** method, returns the array as a string |
+
+Also we can use methods like ```push, pop, shift, unshift, and splice```.
+
+## Joining multiple arrays
+
+Consider a scenario where you have different arrays and you need to join all of them into a single array. We could iterate each array and add each element to the final array.
+
+Fortunately Javascript already has a method that can do this for us, named the ```concat``` method, which looks as follows:
+
+```javascript
+const zero = 0;
+const positiveNumbers = [1, 2, 3];
+const negativeNumbers = [-3, -2, -1];
+let numbers = negativeNumbers.concat(zero, positiveNumbers);
 ```
